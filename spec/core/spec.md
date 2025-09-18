@@ -32,8 +32,7 @@
 ```md
 # {FEATURE}
 
-**Статус:** draft
-**Цель:** {CONTEXT}
+**Спецификация:** {CONTEXT}
 
 ## User Stories
 
