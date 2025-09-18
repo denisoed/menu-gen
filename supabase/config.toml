@@ -1,0 +1,36 @@
+project_id = "local"
+api_version = "v1"
+
+[api]
+port = 54321
+schemas = ["public", "storage"]
+extra_search_path = ["extensions"]
+
+[db]
+version = "15.1"
+port = 54322
+shadow_port = 54324
+image = "supabase/postgres:15.1.0"
+
+[studio]
+port = 54323
+
+[inbucket]
+port = 54325
+
+[imgproxy]
+port = 54326
+
+[kong]
+port = 54327
+
+[functions]
+max_response_size = 10485760
+
+[auth]
+site_url = "http://localhost:3000"
+additional_redirect_urls = []
+jwt_secret = "super-secret-jwt-token-with-at-least-32-characters"
+
+[analytics]
+enabled = false
