@@ -47,15 +47,15 @@ npm --version
 
 ### npm-скрипты
 
-| Скрипт | Назначение |
-| ------ | ---------- |
-| `npm run dev` | Запуск Vite dev-сервера с hot module replacement. |
-| `npm run build` | Продакшен-сборка проекта. Минифицирует бандлы и использует purge Tailwind. |
-| `npm run preview` | Локальный предпросмотр собранной версии (`vite preview`). |
-| `npm run lint` | ESLint для `.vue`/`.ts` файлов (ошибки блокируют коммит и CI). |
-| `npm run format` | Автоформатирование с Prettier. |
-| `npm run test:type` | Проверка типов (`vue-tsc --noEmit`). |
-| `npm run prepare` | Установка git-хуков Husky. Запускается автоматически при `npm install`. |
+| Скрипт              | Назначение                                                                 |
+| ------------------- | -------------------------------------------------------------------------- |
+| `npm run dev`       | Запуск Vite dev-сервера с hot module replacement.                          |
+| `npm run build`     | Продакшен-сборка проекта. Минифицирует бандлы и использует purge Tailwind. |
+| `npm run preview`   | Локальный предпросмотр собранной версии (`vite preview`).                  |
+| `npm run lint`      | ESLint для `.vue`/`.ts` файлов (ошибки блокируют коммит и CI).             |
+| `npm run format`    | Автоформатирование с Prettier.                                             |
+| `npm run test:type` | Проверка типов (`vue-tsc --noEmit`).                                       |
+| `npm run prepare`   | Установка git-хуков Husky. Запускается автоматически при `npm install`.    |
 
 ### Качество и pre-commit
 
@@ -95,12 +95,12 @@ npm --version
 
 ### Типовые проблемы
 
-| Проблема | Решение |
-| -------- | ------- |
-| Конфликт порта `5173` при запуске dev-сервера | Запустите `npm run dev -- --port 5174` или укажите нужный порт в `.env`. |
-| Ошибки `npm install` после обновления зависимостей | Удалите `node_modules` и `package-lock.json`, повторно выполните `npm install`. |
-| Хуки Husky не срабатывают | Запустите `npm run prepare` и убедитесь, что выполняете команды из git-репозитория. |
-| Некорректная тема после очистки storage | Вызовите `localStorage.removeItem('color-scheme-preference')` или воспользуйтесь кнопкой "System" в `ThemeToggle`. |
+| Проблема                                           | Решение                                                                                                            |
+| -------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| Конфликт порта `5173` при запуске dev-сервера      | Запустите `npm run dev -- --port 5174` или укажите нужный порт в `.env`.                                           |
+| Ошибки `npm install` после обновления зависимостей | Удалите `node_modules` и `package-lock.json`, повторно выполните `npm install`.                                    |
+| Хуки Husky не срабатывают                          | Запустите `npm run prepare` и убедитесь, что выполняете команды из git-репозитория.                                |
+| Некорректная тема после очистки storage            | Вызовите `localStorage.removeItem('color-scheme-preference')` или воспользуйтесь кнопкой "System" в `ThemeToggle`. |
 
 ### Наблюдаемость
 
@@ -112,6 +112,8 @@ npm --version
    ```bash
    cp .env.example .env
    ```
+
+   - `VITE_SUPABASE_URL` и `VITE_SUPABASE_ANON_KEY` соответствуют Project URL и anon key из Supabase Dashboard и используются фронтендом.
    - `SUPABASE_ACCESS_TOKEN` и `SUPABASE_PROJECT_REF` используются для деплоя.
    - `SUPABASE_DB_PASSWORD` потребуется при подключении к локальной базе.
 2. Запустите локальный стек Supabase:
@@ -136,7 +138,7 @@ make serve-webhook      # локальный запуск webhook-handler
 make deploy        # деплой двух функций в Supabase (требуются секреты)
 ```
 
-Edge-функции можно тестировать через Supabase CLI:
+Фронтенд инициализирует Supabase клиент через плагин `src/plugins/supabase.ts`, который читает значения `VITE_SUPABASE_URL` и `VITE_SUPABASE_ANON_KEY` из окружения. Edge-функции можно тестировать через Supabase CLI:
 
 ```bash
 supabase functions serve hello-world --env-file .env
