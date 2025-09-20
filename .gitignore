@@ -1,0 +1,10 @@
+node_modules
+/dist
+/.vitepress
+.DS_Store
+.env.local
+
+# Editor directories and files
+.vscode/
+.idea/
+*.log

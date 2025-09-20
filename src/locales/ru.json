@@ -1,0 +1,58 @@
+{
+  "app": {
+    "title": "Vue Tailwind Starter",
+    "description": "Готовая база для проектов на Vue 3 + Tailwind.",
+    "footer": "Vue Tailwind Starter — быстрое начало разработки"
+  },
+  "navigation": {
+    "home": "Главная",
+    "about": "О шаблоне"
+  },
+  "themeToggle": {
+    "label": "Тема: {theme}",
+    "light": "Светлая",
+    "dark": "Тёмная",
+    "system": "Системная"
+  },
+  "localeSwitcher": {
+    "label": "Язык",
+    "en": "Английский",
+    "ru": "Русский"
+  },
+  "home": {
+    "hero": {
+      "title": "Запускайте интерфейсы быстрее",
+      "subtitle": "Pinia, Vue Router, Tailwind токены и i18n уже настроены."
+    },
+    "cards": {
+      "tokens": {
+        "title": "Дизайн-токены",
+        "description": "Используйте общие CSS-переменные для фонов, поверхностей и типографики."
+      },
+      "theme": {
+        "title": "Адаптивные темы",
+        "description": "Переключайте светлую, тёмную и системную тему через один composable."
+      },
+      "stack": {
+        "title": "Современные инструменты",
+        "description": "Vite + TypeScript + ESLint + Prettier готовы к продакшену."
+      }
+    },
+    "callout": {
+      "title": "Реактивный счётчик",
+      "description": "Хранилище Pinia делает состояние предсказуемым и типобезопасным.",
+      "increment": "Увеличить",
+      "reset": "Сбросить",
+      "value": "Текущее значение",
+      "double": "Удвоенное"
+    }
+  },
+  "about": {
+    "title": "Соглашения проекта",
+    "body": "Расширяйте токены в src/styles/tokens.scss, добавляйте локали в src/locales и создавайте компоненты в src/components."
+  },
+  "themePanel": {
+    "title": "Цветовая схема",
+    "helper": "Выберите предпочитаемую тему"
+  }
+}
