@@ -1,0 +1,63 @@
+$font-family-sans:
+  'Inter',
+  system-ui,
+  -apple-system,
+  BlinkMacSystemFont,
+  'Segoe UI',
+  sans-serif;
+
+$light-tokens: (
+  color-bg: #ffffff,
+  color-surface: #f1f5f9,
+  color-text: #0f172a,
+  color-muted: #64748b,
+  color-primary: #2563eb,
+  color-primary-contrast: #f8fafc,
+  color-ring: #3b82f6,
+  spacing-base: 1rem,
+);
+
+$dark-tokens: (
+  color-bg: #0f172a,
+  color-surface: #1e293b,
+  color-text: #e2e8f0,
+  color-muted: #94a3b8,
+  color-primary: #60a5fa,
+  color-primary-contrast: #0f172a,
+  color-ring: #38bdf8,
+  spacing-base: 1rem,
+);
+
+@function token-value($value) {
+  @if type-of($value) == 'color' {
+    @return '#{red($value)} #{green($value)} #{blue($value)}';
+  }
+
+  @return $value;
+}
+
+@mixin emit-tokens($tokens) {
+  @each $name, $value in $tokens {
+    --#{$name}: #{token-value($value)};
+  }
+}
+
+:root {
+  font-family: $font-family-sans;
+  @include emit-tokens($light-tokens);
+}
+
+.dark {
+  @include emit-tokens($dark-tokens);
+}
+
+@mixin surface-card {
+  background-color: rgb(var(--color-surface) / 1);
+  border: 1px solid rgb(var(--color-muted) / 0.25);
+  border-radius: 1rem;
+  box-shadow: 0 20px 45px -24px rgba(15, 23, 42, 0.35);
+}
+
+:root {
+  color-scheme: light dark;
+}

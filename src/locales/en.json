@@ -1,0 +1,58 @@
+{
+  "app": {
+    "title": "Vue Tailwind Starter",
+    "description": "Opinionated baseline for Vue 3 + Tailwind projects.",
+    "footer": "Vue Tailwind Starter — build quickly with batteries included"
+  },
+  "navigation": {
+    "home": "Home",
+    "about": "About"
+  },
+  "themeToggle": {
+    "label": "Theme: {theme}",
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System"
+  },
+  "localeSwitcher": {
+    "label": "Language",
+    "en": "English",
+    "ru": "Russian"
+  },
+  "home": {
+    "hero": {
+      "title": "Kick-start your interface",
+      "subtitle": "Pinia, Vue Router, Tailwind tokens and i18n already configured."
+    },
+    "cards": {
+      "tokens": {
+        "title": "Design tokens",
+        "description": "Use shared CSS variables for backgrounds, surfaces and typography."
+      },
+      "theme": {
+        "title": "Adaptive themes",
+        "description": "Switch between light, dark and system modes with a single composable."
+      },
+      "stack": {
+        "title": "Modern tooling",
+        "description": "Vite + TypeScript + ESLint + Prettier ready for production."
+      }
+    },
+    "callout": {
+      "title": "Reactive counter",
+      "description": "The Pinia store keeps state predictable and type-safe.",
+      "increment": "Increase",
+      "reset": "Reset",
+      "value": "Current value",
+      "double": "Doubled"
+    }
+  },
+  "about": {
+    "title": "Project conventions",
+    "body": "Extend design tokens in src/styles/tokens.scss, add new locales to src/locales and create components in src/components."
+  },
+  "themePanel": {
+    "title": "Color scheme",
+    "helper": "Choose preferred theme"
+  }
+}
