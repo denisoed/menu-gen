@@ -1,5 +1,6 @@
 node_modules
 /dist
+/coverage
 /.vitepress
 .DS_Store
 .env.local
