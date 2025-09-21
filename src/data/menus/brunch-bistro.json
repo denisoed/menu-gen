@@ -1,0 +1,119 @@
+{
+  "id": "brunch-bistro",
+  "name": "Brunch Bistro",
+  "description": "Weekend menu with seasonal brunch classics, light bowls and vibrant coffee pairings.",
+  "location": "Moscow, Pokrovka 12",
+  "cuisines": ["European", "Fusion"],
+  "bannerImages": [
+    "https://images.unsplash.com/photo-1528712306091-ed0763094c98",
+    "https://images.unsplash.com/photo-1504674900247-0877df9cc836",
+    "https://images.unsplash.com/photo-1493770348161-369560ae357d"
+  ],
+  "currency": "₽",
+  "contact": {
+    "phone": "+7 495 555-13-37",
+    "website": "https://brunch-bistro.example.com",
+    "messenger": "@brunchbistro"
+  },
+  "hours": "08:00 – 18:00",
+  "categories": [
+    {
+      "id": "sweet-starts",
+      "name": "Sweet starts",
+      "description": "Dessert-style breakfast favourites to ease into the weekend.",
+      "dishes": [
+        {
+          "id": "pancakes-honey",
+          "name": "Buckwheat pancakes with honey butter",
+          "description": "Three airy pancakes with whipped honey butter, caramelised pears and roasted nuts.",
+          "price": 580,
+          "tags": ["vegetarian", "contains nuts"],
+          "popular": true,
+          "image": "https://images.unsplash.com/photo-1587614382346-4ec892f9aca3",
+          "orderUrl": "https://brunch-bistro.example.com/order/pancakes"
+        },
+        {
+          "id": "french-toast",
+          "name": "Brioche french toast",
+          "description": "Cardamom brioche with vanilla custard, berry compote and citrus zest.",
+          "price": 640,
+          "tags": ["vegetarian"],
+          "popular": true,
+          "image": "https://images.unsplash.com/photo-1481391032119-d89fee407e44"
+        },
+        {
+          "id": "secret-waffle",
+          "description": "Chef's weekly experiment with local fruit glaze and seed brittle.",
+          "price": 520,
+          "popular": false
+        }
+      ]
+    },
+    {
+      "id": "savory-signatures",
+      "name": "Savory signatures",
+      "description": "Eggs, bowls and tartines designed for sharing.",
+      "dishes": [
+        {
+          "id": "egg-benedict",
+          "name": "Miso hollandaise Benedict",
+          "description": "Poached eggs, smoked trout, miso hollandaise and greens on sourdough.",
+          "price": 720,
+          "tags": ["fish", "chef special"],
+          "popular": true,
+          "image": "https://images.unsplash.com/photo-1525755662778-989d0524087e",
+          "allergens": ["eggs", "fish", "gluten"],
+          "orderUrl": "https://brunch-bistro.example.com/order/benedict"
+        },
+        {
+          "id": "grain-bowl",
+          "name": "Warm quinoa bowl",
+          "description": "Quinoa, roasted pumpkin, pickled beets, avocado tahini and crispy chickpeas.",
+          "price": 690,
+          "tags": ["vegan", "gluten free"],
+          "image": "https://images.unsplash.com/photo-1512621776951-a57141f2eefd"
+        },
+        {
+          "id": "chicken-sandwich",
+          "name": "Citrus chicken sandwich",
+          "description": "Citrus-marinated chicken, fennel slaw and harissa aioli on toasted focaccia.",
+          "price": 610,
+          "tags": ["poultry"],
+          "popular": false,
+          "image": "https://images.unsplash.com/photo-1546069901-ba9599a7e63c"
+        }
+      ]
+    },
+    {
+      "id": "coffee-bar",
+      "name": "Coffee bar",
+      "description": "Signature drinks and seasonal specials from our roastery.",
+      "dishes": [
+        {
+          "id": "orange-flatwhite",
+          "name": "Orange peel flat white",
+          "description": "Double shot with house blend, caramelised orange peel syrup and microfoam.",
+          "price": 310,
+          "tags": ["coffee"],
+          "popular": true
+        },
+        {
+          "id": "maple-coldbrew",
+          "name": "Maple cold brew",
+          "description": "12-hour brew over ice with maple reduction and grapefruit bitters.",
+          "price": 340,
+          "tags": ["coffee", "seasonal"],
+          "popular": false
+        },
+        {
+          "id": "rooibos-latte",
+          "name": "Rooibos latte",
+          "description": "Caffeine-free rooibos with oat milk and panela sugar.",
+          "price": 290,
+          "tags": ["vegan", "caffeine free"],
+          "popular": false
+        }
+      ]
+    }
+  ]
+}

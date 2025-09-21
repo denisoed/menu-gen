@@ -43,6 +43,7 @@ import { useI18n } from 'vue-i18n'
 
 import LocaleSwitcher from '@/components/LocaleSwitcher.vue'
 import ThemeToggle from '@/components/ThemeToggle.vue'
+import { listAvailableMenus } from '@/data/menus'
 
 type NavLink = {
   to: string
@@ -51,8 +52,12 @@ type NavLink = {
 
 const { t } = useI18n()
 
+const availableMenus = listAvailableMenus()
+const defaultMenuPath = computed(() => (availableMenus.length ? `/${availableMenus[0].id}` : '/'))
+
 const links = computed<NavLink[]>(() => [
   { to: '/', label: 'navigation.home' },
+  { to: defaultMenuPath.value, label: 'navigation.menu' },
   { to: '/about', label: 'navigation.about' },
 ])
 </script>
