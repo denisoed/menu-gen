@@ -6,6 +6,7 @@
   },
   "navigation": {
     "home": "Home",
+    "menu": "Menu",
     "about": "About"
   },
   "themeToggle": {
@@ -54,5 +55,48 @@
   "themePanel": {
     "title": "Color scheme",
     "helper": "Choose preferred theme"
+  },
+  "menu": {
+    "header": {
+      "title": "Seasonal menu",
+      "location": "Location",
+      "cuisines": "Cuisines",
+      "hours": "Hours",
+      "phone": "Phone",
+      "website": "Website",
+      "messenger": "Messenger"
+    },
+    "banner": {
+      "alt": "Menu banner image",
+      "placeholder": "Add photos to highlight the menu story."
+    },
+    "filters": {
+      "searchLabel": "Search",
+      "searchPlaceholder": "Find a dish or ingredient",
+      "results": "{count} dishes found",
+      "reset": "Reset filters",
+      "categoriesTitle": "Categories",
+      "emptyCategories": "Categories will appear once dishes are grouped."
+    },
+    "popular": {
+      "title": "Popular this week",
+      "subtitle": "Guests are loving these dishes",
+      "count": "{count} highlighted dishes",
+      "empty": "Popular dishes will appear here once they are marked."
+    },
+    "dish": {
+      "order": "Order"
+    },
+    "state": {
+      "emptyTitle": "No dishes match your filters",
+      "emptyDescription": "Try changing the search query or show all categories to continue browsing.",
+      "resetFilters": "Reset filters",
+      "notFoundTitle": "Menu not found",
+      "notFoundDescription": "We could not find a menu for this link. Choose another menu or return home.",
+      "loadFailedTitle": "Failed to load menu",
+      "loadFailedDescription": "Something went wrong while preparing the menu. Please try again.",
+      "goToSample": "Open featured menu",
+      "goHome": "Go to home"
+    }
   }
 }

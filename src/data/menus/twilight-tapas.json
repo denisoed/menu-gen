@@ -1,0 +1,96 @@
+{
+  "id": "twilight-tapas",
+  "name": "Twilight Tapas",
+  "description": "Evening sharing plates inspired by Mediterranean coastlines and late-night markets.",
+  "location": "Saint Petersburg, Rubinstein 15",
+  "cuisines": ["Mediterranean", "Tapas"],
+  "bannerImages": [
+    "https://images.unsplash.com/photo-1504674900247-0877df9cc836",
+    "https://images.unsplash.com/photo-1525755662778-989d0524087e"
+  ],
+  "currency": "₽",
+  "contact": {
+    "phone": "+7 812 700-22-44",
+    "website": "https://twilight-tapas.example.com"
+  },
+  "hours": "17:00 – 01:00",
+  "categories": [
+    {
+      "id": "small-plates",
+      "name": "Small plates",
+      "description": "Vibrant vegetables, crudos and sharing bites.",
+      "dishes": [
+        {
+          "id": "heirloom-tomatoes",
+          "name": "Heirloom tomato escalivada",
+          "description": "Coal-roasted tomatoes with smoked olive oil and almond romesco.",
+          "price": 540,
+          "tags": ["vegan", "gluten free"],
+          "popular": true
+        },
+        {
+          "id": "sea-bass-crudo",
+          "name": "Sea bass crudo",
+          "description": "Citrus-cured sea bass, fennel pollen and green grape aguachile.",
+          "price": 820,
+          "tags": ["fish"],
+          "popular": true
+        },
+        {
+          "id": "charred-broccoli",
+          "name": "Charred broccoli with harissa labneh",
+          "description": "Warm broccoli, harissa labneh, smoked almonds and preserved lemon.",
+          "price": 490,
+          "tags": ["vegetarian"],
+          "popular": false
+        }
+      ]
+    },
+    {
+      "id": "skewers",
+      "name": "Josper skewers",
+      "description": "Skewers grilled over almond wood with house marinades.",
+      "dishes": [
+        {
+          "id": "lamb-kofte",
+          "name": "Lamb kofte with pomegranate glaze",
+          "description": "Spiced lamb, pomegranate molasses and mint yoghurt.",
+          "price": 860,
+          "tags": ["meat"],
+          "popular": true
+        },
+        {
+          "id": "octopus-skewer",
+          "name": "Galician octopus",
+          "description": "Slow-cooked octopus finished on the grill with smoked paprika butter.",
+          "price": 940,
+          "tags": ["seafood"],
+          "popular": false
+        }
+      ]
+    },
+    {
+      "id": "desserts",
+      "name": "Desserts",
+      "description": "Late night sweets with regional accents.",
+      "dishes": [
+        {
+          "id": "olive-oil-cake",
+          "name": "Citrus olive oil cake",
+          "description": "Warm olive oil sponge, yoghurt espuma and bergamot marmalade.",
+          "price": 420,
+          "tags": ["vegetarian"],
+          "popular": false
+        },
+        {
+          "id": "chocolate-ganache",
+          "name": "Sea salt chocolate ganache",
+          "description": "Dark chocolate ganache, smoked salt and candied orange.",
+          "price": 450,
+          "tags": ["vegetarian"],
+          "popular": true
+        }
+      ]
+    }
+  ]
+}
