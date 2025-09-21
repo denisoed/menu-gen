@@ -47,21 +47,30 @@ npm --version
 
 ### npm-скрипты
 
-| Скрипт              | Назначение                                                                 |
-| ------------------- | -------------------------------------------------------------------------- |
-| `npm run dev`       | Запуск Vite dev-сервера с hot module replacement.                          |
-| `npm run build`     | Продакшен-сборка проекта. Минифицирует бандлы и использует purge Tailwind. |
-| `npm run preview`   | Локальный предпросмотр собранной версии (`vite preview`).                  |
-| `npm run lint`      | ESLint для `.vue`/`.ts` файлов (ошибки блокируют коммит и CI).             |
-| `npm run format`    | Автоформатирование с Prettier.                                             |
-| `npm run test:type` | Проверка типов (`vue-tsc --noEmit`).                                       |
-| `npm run prepare`   | Установка git-хуков Husky. Запускается автоматически при `npm install`.    |
+| Скрипт                  | Назначение                                                                 |
+| ----------------------- | -------------------------------------------------------------------------- |
+| `npm run dev`           | Запуск Vite dev-сервера с hot module replacement.                          |
+| `npm run build`         | Продакшен-сборка проекта. Минифицирует бандлы и использует purge Tailwind. |
+| `npm run preview`       | Локальный предпросмотр собранной версии (`vite preview`).                  |
+| `npm run lint`          | ESLint для `.vue`/`.ts` файлов (ошибки блокируют коммит и CI).             |
+| `npm run test`          | Запуск Jest-юнит-тестов в среде jsdom.                                     |
+| `npm run test:coverage` | Генерация отчёта о покрытии (`coverage/` с HTML и LCOV).                   |
+| `npm run format`        | Автоформатирование с Prettier.                                             |
+| `npm run test:type`     | Проверка типов (`vue-tsc --noEmit`).                                       |
+| `npm run prepare`       | Установка git-хуков Husky. Запускается автоматически при `npm install`.    |
 
 ### Качество и pre-commit
 
 - Husky конфигурирует `pre-commit`, который запускает `lint-staged` (Prettier + ESLint) и типизацию перед коммитом.
 - При необходимости повторно активируйте хуки командой `npm run prepare`.
 - В CI достаточно запускать `npm run lint`, `npm run test:type` и `npm run build` — эти же команды указаны в чеклисте PR.
+
+### Тестирование и покрытие
+
+- `npm run test` запускает Jest с конфигурацией для Vue 3/Pinia и jsdom.
+- `npm run test -- --coverage` или `npm run test:coverage` формируют отчёты в каталоге `coverage/` (HTML, text-summary, LCOV). Откройте `coverage/lcov-report/index.html`, чтобы просмотреть детализированную раскраску строк.
+- Пороги покрытия выставлены на уровне ≥80% для statements/lines/functions и ≥70% для branches. При снижении значений тесты падают.
+- Следите за стабильностью через workflow **Frontend Tests and Coverage**: job публикует таблицу в summary GitHub Actions, прикрепляет артефакт `coverage-reports` и оставляет комментарий в PR со сводкой покрытия.
 
 ### Темы и дизайн-токены
 
@@ -109,6 +118,7 @@ npm --version
 ## Настройка Supabase окружения
 
 1. Скопируйте файл переменных окружения и заполните значения:
+
    ```bash
    cp .env.example .env
    ```
@@ -116,6 +126,7 @@ npm --version
    - `VITE_SUPABASE_URL` и `VITE_SUPABASE_ANON_KEY` соответствуют Project URL и anon key из Supabase Dashboard и используются фронтендом.
    - `SUPABASE_ACCESS_TOKEN` и `SUPABASE_PROJECT_REF` используются для деплоя.
    - `SUPABASE_DB_PASSWORD` потребуется при подключении к локальной базе.
+
 2. Запустите локальный стек Supabase:
    ```bash
    supabase start
@@ -146,6 +157,8 @@ supabase functions serve webhook-handler --env-file .env
 ```
 
 ## CI/CD
+
+Workflow `.github/workflows/frontend-tests.yml` запускается при `push` и `pull_request`, устанавливает Node.js из `.nvmrc`, выполняет `npm run lint`, `npm run test:type`, `npm run test -- --coverage`, загружает артефакт `coverage-reports` и публикует сводку покрытия в summary и комментарии PR.
 
 Workflow `.github/workflows/deploy-supabase-functions.yml` запускается при push в `main` и выполняет:
 
