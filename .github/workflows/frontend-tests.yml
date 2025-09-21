@@ -1,0 +1,144 @@
+name: Frontend Tests and Coverage
+
+on:
+  push:
+    branches:
+      - '*'
+  pull_request:
+    branches:
+      - '*'
+
+jobs:
+  test:
+    name: Lint, Unit Tests and Coverage
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+          cache-dependency-path: package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run ESLint
+        run: npm run lint
+
+      - name: Type check
+        run: npm run test:type
+
+      - name: Run unit tests with coverage
+        run: npm run test -- --coverage
+
+      - name: Upload coverage artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-reports
+          path: coverage
+          if-no-files-found: error
+
+      - name: Publish coverage summary
+        id: coverage-summary
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs')
+            const path = require('path')
+            const { createCoverageMap } = require('istanbul-lib-coverage')
+
+            const summaryPath = path.join(process.env.GITHUB_WORKSPACE, 'coverage', 'coverage-summary.json')
+            const coverageFinalPath = path.join(process.env.GITHUB_WORKSPACE, 'coverage', 'coverage-final.json')
+
+            let coverageTotals
+
+            if (fs.existsSync(summaryPath)) {
+              coverageTotals = JSON.parse(fs.readFileSync(summaryPath, 'utf8')).total
+            } else if (fs.existsSync(coverageFinalPath)) {
+              const coverageMap = createCoverageMap(JSON.parse(fs.readFileSync(coverageFinalPath, 'utf8')))
+              coverageTotals = coverageMap.getCoverageSummary().data
+            } else {
+              core.setFailed('Coverage summary file was not generated')
+              return
+            }
+            const metrics = [
+              { key: 'statements', label: 'Statements' },
+              { key: 'branches', label: 'Branches' },
+              { key: 'functions', label: 'Functions' },
+              { key: 'lines', label: 'Lines' },
+            ]
+
+            const tableRows = metrics.map(({ key, label }) => {
+              const metric = coverageTotals[key]
+              return {
+                label,
+                covered: `${metric.covered}/${metric.total}`,
+                pct: `${metric.pct.toFixed(2)}%`,
+              }
+            })
+
+            core.summary.addHeading('Jest coverage summary')
+            core.summary.addTable([
+              [{ header: true, data: 'Metric' }, { header: true, data: 'Covered' }, { header: true, data: '%' }],
+              ...tableRows.map((row) => [
+                { data: row.label },
+                { data: row.covered },
+                { data: row.pct },
+              ]),
+            ])
+            await core.summary.write()
+
+            const isPullRequest = context.eventName === 'pull_request'
+            const isFork =
+              isPullRequest &&
+              context.payload.pull_request?.head?.repo?.full_name !==
+                context.payload.repository?.full_name
+
+            if (isFork) {
+              core.info('Skipping coverage PR comment because the pull request originates from a fork.')
+            }
+
+            if (isPullRequest && !isFork) {
+              const prNumber = context.payload.pull_request.number
+              const body = [
+                '<!-- jest-coverage-report -->',
+                '### ✅ Jest coverage summary',
+                '',
+                '| Metric | Covered | % |',
+                '| ------ | ------- | - |',
+                ...tableRows.map((row) => `| ${row.label} | ${row.covered} | ${row.pct} |`),
+              ].join('\n')
+
+              try {
+                const { data: comments } = await github.rest.issues.listComments({
+                  ...context.repo,
+                  issue_number: prNumber,
+                })
+
+                const existingComment = comments.find((comment) =>
+                  comment.user?.type === 'Bot' && comment.body?.includes('<!-- jest-coverage-report -->')
+                )
+
+                if (existingComment) {
+                  await github.rest.issues.updateComment({
+                    ...context.repo,
+                    comment_id: existingComment.id,
+                    body,
+                  })
+                } else {
+                  await github.rest.issues.createComment({
+                    ...context.repo,
+                    issue_number: prNumber,
+                    body,
+                  })
+                }
+              } catch (error) {
+                const message = error instanceof Error ? error.message : String(error)
+                core.warning(`Failed to publish coverage comment: ${message}`)
+              }
+            }
