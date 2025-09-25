@@ -2,13 +2,15 @@
   <section class="rounded-3xl border border-surface/60 bg-surface/70 p-6 shadow-sm">
     <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
       <label
-        class="flex w-full items-center gap-3 rounded-full border border-surface/80 bg-background px-5 py-3 shadow-sm"
+        class="flex w-full items-center gap-3 rounded-full border border-surface/60 bg-surface/80 px-4 py-2 shadow-sm focus-within:border-primary/60 focus-within:ring-2 focus-within:ring-primary/30"
       >
-        <span class="text-sm font-medium text-muted">{{ t('menu.filters.searchLabel') }}</span>
+        <span class="shrink-0 text-sm font-medium text-muted">
+          {{ t('menu.filters.searchLabel') }}
+        </span>
         <input
           v-model="searchQuery"
           type="search"
-          class="w-full bg-transparent text-base text-foreground outline-none"
+          class="w-full rounded-full border-none bg-background/95 px-4 py-2 text-base text-foreground outline-none placeholder:text-muted focus:ring-0"
           :placeholder="t('menu.filters.searchPlaceholder')"
           data-testid="menu-search-input"
         />

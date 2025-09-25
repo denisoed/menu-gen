@@ -1,39 +1,53 @@
 <template>
-  <section class="space-y-10 pb-16">
-    <div v-if="status === 'loading'" class="space-y-6">
-      <div class="h-12 w-2/3 animate-pulse rounded-full bg-surface/80" />
-      <div class="h-64 animate-pulse rounded-3xl bg-surface/80" />
-      <div class="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
-        <div v-for="index in 6" :key="index" class="h-56 animate-pulse rounded-3xl bg-surface/80" />
+  <div class="flex flex-col">
+    <div v-if="status === 'loading'" class="flex flex-col">
+      <div class="h-64 w-full animate-pulse bg-surface/80 md:h-80" />
+      <div class="mx-auto w-full max-w-6xl space-y-10 px-6 pb-16 pt-10">
+        <div class="space-y-4">
+          <div class="h-4 w-20 animate-pulse rounded-full bg-surface/80" />
+          <div class="h-12 w-2/3 animate-pulse rounded-full bg-surface/80" />
+          <div class="h-5 w-1/2 animate-pulse rounded-full bg-surface/80" />
+        </div>
+        <div class="h-12 w-full animate-pulse rounded-full bg-surface/80" />
+        <div class="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
+          <div
+            v-for="index in 6"
+            :key="index"
+            class="h-56 animate-pulse rounded-3xl bg-surface/80"
+          />
+        </div>
       </div>
     </div>
 
     <template v-else-if="menu">
-      <MenuHeader :menu="menu" />
       <BannerCarousel :images="menu.bannerImages" />
-      <FiltersPanel />
-      <PopularCarousel v-if="popularDishes.length" :dishes="popularDishes" :menu-id="menu.id" />
+      <div class="mx-auto w-full max-w-6xl space-y-10 px-6 pb-16 pt-10">
+        <MenuHeader :menu="menu" />
+        <FiltersPanel />
+        <PopularCarousel v-if="popularDishes.length" :dishes="popularDishes" :menu-id="menu.id" />
 
-      <DishGrid v-if="hasResults" :categories="filteredCategories" :menu-id="menu.id" />
-      <EmptyState
-        v-else
-        icon="🔍"
-        :title="t('menu.state.emptyTitle')"
-        :description="t('menu.state.emptyDescription')"
-        :action-label="t('menu.state.resetFilters')"
-        @action="onResetFilters"
-      />
+        <DishGrid v-if="hasResults" :categories="filteredCategories" :menu-id="menu.id" />
+        <EmptyState
+          v-else
+          icon="🔍"
+          :title="t('menu.state.emptyTitle')"
+          :description="t('menu.state.emptyDescription')"
+          :action-label="t('menu.state.resetFilters')"
+          @action="onResetFilters"
+        />
+      </div>
     </template>
 
-    <EmptyState
-      v-else
-      icon="🍽"
-      :title="errorTitle"
-      :description="errorDescription"
-      :action-label="fallbackActionLabel"
-      @action="navigateToFallback"
-    />
-  </section>
+    <div v-else class="mx-auto w-full max-w-6xl px-6 py-16">
+      <EmptyState
+        icon="🍽"
+        :title="errorTitle"
+        :description="errorDescription"
+        :action-label="fallbackActionLabel"
+        @action="navigateToFallback"
+      />
+    </div>
+  </div>
 </template>
 
 <script setup lang="ts">

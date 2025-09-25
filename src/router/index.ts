@@ -17,6 +17,9 @@ export const routes: RouteRecordRaw[] = [
     name: 'menu',
     component: () => import('@/views/MenuPage.vue'),
     props: true,
+    meta: {
+      layout: 'menu',
+    },
   },
 ]
 

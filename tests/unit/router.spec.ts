@@ -5,6 +5,7 @@ describe('router configuration', () => {
     const route = routes.find((record) => record.name === 'menu')
     expect(route).toBeDefined()
     expect(route?.path).toBe('/:uuid')
+    expect(route?.meta?.layout).toBe('menu')
   })
 
   it('navigates to menu path with uuid', async () => {
