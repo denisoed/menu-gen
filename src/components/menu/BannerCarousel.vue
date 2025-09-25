@@ -1,5 +1,5 @@
 <template>
-  <section class="w-full">
+  <section ref="bannerCarouselContainer" class="w-full carousel-scroll-lock">
     <Carousel
       v-if="images.length"
       :items-to-show="1"
@@ -34,6 +34,8 @@ import { computed } from 'vue'
 import { Carousel, Navigation, Slide } from 'vue3-carousel'
 import { useI18n } from 'vue-i18n'
 
+import { useCarouselScrollLock } from '@/composables/useCarouselScrollLock'
+
 import 'vue3-carousel/dist/carousel.css'
 
 const props = defineProps<{
@@ -43,9 +45,19 @@ const props = defineProps<{
 const { t } = useI18n()
 
 const images = computed(() => props.images ?? [])
+
+const { containerRef: bannerCarouselContainer } = useCarouselScrollLock({
+  enabled: () => images.value.length > 1,
+})
 </script>
 
 <style scoped>
+.carousel-scroll-lock {
+  overflow: hidden;
+  touch-action: pan-y pinch-zoom;
+  overscroll-behavior: contain;
+}
+
 .carousel-nav :deep(button) {
   border-radius: 9999px;
   width: 2.75rem;

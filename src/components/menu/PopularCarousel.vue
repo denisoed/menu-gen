@@ -1,5 +1,5 @@
 <template>
-  <section class="space-y-6">
+  <section ref="popularCarouselContainer" class="space-y-6 carousel-scroll-lock">
     <header class="space-y-2 md:flex md:items-end md:justify-between md:gap-6">
       <div class="space-y-2">
         <h2 class="text-2xl font-semibold text-foreground">
@@ -42,6 +42,7 @@ import { useI18n } from 'vue-i18n'
 
 import DishCard from './DishCard.vue'
 import type { HighlightedDish } from '@/types/menu'
+import { useCarouselScrollLock } from '@/composables/useCarouselScrollLock'
 
 import 'vue3-carousel/dist/carousel.css'
 
@@ -55,6 +56,10 @@ const { t } = useI18n()
 const dishes = computed(() => props.dishes)
 const menuId = computed(() => props.menuId)
 
+const { containerRef: popularCarouselContainer } = useCarouselScrollLock({
+  enabled: () => dishes.value.length > 1,
+})
+
 const carouselBreakpoints = {
   768: {
     itemsToShow: 2,
@@ -66,6 +71,12 @@ const carouselBreakpoints = {
 </script>
 
 <style scoped>
+.carousel-scroll-lock {
+  overflow: hidden;
+  touch-action: pan-y pinch-zoom;
+  overscroll-behavior: contain;
+}
+
 .carousel-nav :deep(button) {
   border-radius: 9999px;
   width: 2.75rem;

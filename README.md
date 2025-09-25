@@ -107,6 +107,7 @@ npm --version
 - Экран `/[uuid]` собирается во `views/MenuPage.vue` из модульных компонентов (`MenuHeader`, `BannerCarousel`, `FiltersPanel`, `PopularCarousel`, `DishGrid`, `DishCard`, `EmptyState`).
 - Компоненты оформлены Tailwind-классами, поддерживают тёмную тему и локализацию (`src/locales/en.json`, `src/locales/ru.json`).
 - Для каруселей используется `vue3-carousel`: навигация, свайпы и адаптивные брейкпоинты протестированы на desktop/mobile.
+- Карусели подключают `useCarouselScrollLock`, который отслеживает pointer/touch-жесты, предотвращает вертикальный скролл при доминирующем горизонтальном свайпе и автоматически очищает слушатели при размонтировании.
 
 ### Структура данных меню
 
