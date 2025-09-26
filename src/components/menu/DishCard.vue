@@ -42,7 +42,7 @@
         <button
           type="button"
           class="inline-flex items-center gap-2 rounded-full border border-primary bg-primary/90 px-5 py-2 text-sm font-semibold text-white transition hover:bg-primary"
-          @click="handleOrder"
+          @click.stop="handleOrder"
         >
           <span aria-hidden="true">🍽</span>
           {{ t('menu.dish.order') }}
