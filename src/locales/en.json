@@ -98,5 +98,17 @@
       "goToSample": "Open featured menu",
       "goHome": "Go to home"
     }
+  },
+  "cart": {
+    "button": {
+      "ariaLabel": {
+        "one": "Open cart, {count} item selected",
+        "other": "Open cart, {count} items selected"
+      },
+      "announcement": {
+        "one": "{count} item in cart",
+        "other": "{count} items in cart"
+      }
+    }
   }
 }

@@ -54,9 +54,11 @@
 
 <script setup lang="ts">
 import { computed, onMounted } from 'vue'
+import { getActivePinia } from 'pinia'
 import { useI18n } from 'vue-i18n'
 
 import type { MenuDish } from '@/types/menu'
+import { useCartStore } from '@/stores/cart'
 import { trackEvent } from '@/utils/analytics'
 
 const props = withDefaults(
@@ -71,6 +73,8 @@ const props = withDefaults(
 )
 
 const { t } = useI18n()
+const activePinia = getActivePinia()
+const cartStore = activePinia ? useCartStore() : null
 
 const dishTags = computed(() => props.dish.tags)
 
@@ -92,6 +96,7 @@ onMounted(() => {
 
 function handleOrder() {
   trackEvent('menu.dish.order', { menuId: props.menuId, dishId: props.dish.id })
+  cartStore?.addItem()
   if (props.dish.orderUrl) {
     window.open(props.dish.orderUrl, '_blank', 'noopener')
   }

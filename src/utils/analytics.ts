@@ -4,6 +4,8 @@ export type AnalyticsEventName =
   | 'menu.filter'
   | 'menu.dish.view'
   | 'menu.dish.order'
+  | 'cart.item.add'
+  | 'cart.button.click'
 
 export type AnalyticsPayload = Record<string, unknown>
 

@@ -47,6 +47,8 @@
         @action="navigateToFallback"
       />
     </div>
+
+    <FloatingCartButton v-if="status === 'ready'" :count="cartCount" @click="onCartClick" />
   </div>
 </template>
 
@@ -55,6 +57,7 @@ import { computed, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 
+import FloatingCartButton from '@/components/cart/FloatingCartButton.vue'
 import BannerCarousel from '@/components/menu/BannerCarousel.vue'
 import DishGrid from '@/components/menu/DishGrid.vue'
 import EmptyState from '@/components/menu/EmptyState.vue'
@@ -62,11 +65,14 @@ import FiltersPanel from '@/components/menu/FiltersPanel.vue'
 import MenuHeader from '@/components/menu/MenuHeader.vue'
 import PopularCarousel from '@/components/menu/PopularCarousel.vue'
 import { useMenuStore } from '@/stores/menu'
+import { useCartStore } from '@/stores/cart'
+import { trackEvent } from '@/utils/analytics'
 
 const { t } = useI18n()
 const route = useRoute()
 const router = useRouter()
 const menuStore = useMenuStore()
+const cartStore = useCartStore()
 
 const status = computed(() => menuStore.status)
 const menu = computed(() => menuStore.menu)
@@ -75,6 +81,7 @@ const filteredCategories = computed(() => menuStore.filteredCategories)
 const hasResults = computed(() => menuStore.hasResults)
 const availableMenus = computed(() => menuStore.availableMenus)
 const error = computed(() => menuStore.error)
+const cartCount = computed(() => cartStore.totalItems)
 
 const errorTitle = computed(() =>
   error.value === 'not-found' ? t('menu.state.notFoundTitle') : t('menu.state.loadFailedTitle')
@@ -106,5 +113,12 @@ function navigateToFallback() {
   } else {
     router.push({ name: 'home' })
   }
+}
+
+function onCartClick() {
+  trackEvent('cart.button.click', {
+    menuId: menu.value?.id ?? null,
+    items: cartCount.value,
+  })
 }
 </script>
