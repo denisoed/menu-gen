@@ -12,23 +12,24 @@
       </p>
     </header>
 
-    <Carousel
-      v-if="dishes.length"
-      :items-to-show="1.1"
-      :wrap-around="dishes.length > 2"
-      :breakpoints="carouselBreakpoints"
-      :mouse-drag="true"
-      :pause-autoplay-on-hover="true"
-      :transition="700"
-      class="-mx-2 md:mx-0"
-    >
-      <Slide v-for="dish in dishes" :key="dish.id" class="px-2 md:px-3">
-        <DishCard :dish="dish" :menu-id="menuId" layout="compact" />
-      </Slide>
-      <template #addons>
-        <Navigation class="carousel-nav" />
-      </template>
-    </Carousel>
+    <div v-if="dishes.length" ref="carouselContainer" class="carousel-touch-guard">
+      <Carousel
+        :items-to-show="1.1"
+        :wrap-around="dishes.length > 2"
+        :breakpoints="carouselBreakpoints"
+        :mouse-drag="true"
+        :pause-autoplay-on-hover="true"
+        :transition="700"
+        class="-mx-2 md:mx-0"
+      >
+        <Slide v-for="dish in dishes" :key="dish.id" class="px-2 md:px-3">
+          <DishCard :dish="dish" :menu-id="menuId" layout="compact" />
+        </Slide>
+        <template #addons>
+          <Navigation class="carousel-nav" />
+        </template>
+      </Carousel>
+    </div>
     <p v-else class="text-sm text-muted">
       {{ t('menu.popular.empty') }}
     </p>
@@ -36,12 +37,13 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import { Carousel, Navigation, Slide } from 'vue3-carousel'
 import { useI18n } from 'vue-i18n'
 
 import DishCard from './DishCard.vue'
 import type { HighlightedDish } from '@/types/menu'
+import { useSwipeScrollLock } from '@/composables/useSwipeScrollLock'
 
 import 'vue3-carousel/dist/carousel.css'
 
@@ -54,6 +56,9 @@ const { t } = useI18n()
 
 const dishes = computed(() => props.dishes)
 const menuId = computed(() => props.menuId)
+const carouselContainer = ref<HTMLElement | null>(null)
+
+useSwipeScrollLock(carouselContainer)
 
 const carouselBreakpoints = {
   768: {
@@ -66,6 +71,12 @@ const carouselBreakpoints = {
 </script>
 
 <style scoped>
+.carousel-touch-guard {
+  touch-action: pan-y pinch-zoom;
+  overscroll-behavior: contain;
+  user-select: none;
+}
+
 .carousel-nav :deep(button) {
   border-radius: 9999px;
   width: 2.75rem;
